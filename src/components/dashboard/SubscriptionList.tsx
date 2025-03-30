@@ -33,7 +33,7 @@ export const SubscriptionList = ({
   onEdit,
   onDelete,
   onToggleReminder,
-  currency = 'USD',
+  currency = 'INR',
 }: SubscriptionListProps) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

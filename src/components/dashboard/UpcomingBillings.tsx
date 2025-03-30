@@ -10,7 +10,7 @@ interface UpcomingBillingsProps {
   currency?: CurrencyCode;
 }
 
-export const UpcomingBillings = ({ subscriptions, currency = 'USD' }: UpcomingBillingsProps) => {
+export const UpcomingBillings = ({ subscriptions, currency = 'INR' }: UpcomingBillingsProps) => {
   const upcomingBillings = getUpcomingBillings(subscriptions, 7);
 
   const formatDate = (dateString: string) => {

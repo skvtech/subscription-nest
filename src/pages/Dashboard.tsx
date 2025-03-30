@@ -22,7 +22,7 @@ import { Subscription } from "@/types/subscription";
 const Dashboard = () => {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
-  const [currency, setCurrency] = useState<CurrencyCode>('USD');
+  const [currency, setCurrency] = useState<CurrencyCode>('INR');
   const { toast } = useToast();
   const navigate = useNavigate();
   

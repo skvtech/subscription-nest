@@ -20,7 +20,6 @@ export const CurrencySelector = ({ currency, onCurrencyChange }: CurrencySelecto
           <SelectValue placeholder="Currency" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="USD">USD</SelectItem>
           <SelectItem value="INR">INR</SelectItem>
         </SelectContent>
       </Select>

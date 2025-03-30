@@ -1,8 +1,8 @@
 import { Subscription, SubscriptionCategory } from "@/types/subscription";
-import { CurrencyCode, convertCurrency, formatCurrency as formatCurrencyUtil } from "./currencyUtils";
+import { CurrencyCode, formatCurrency as formatCurrencyUtil } from "./currencyUtils";
 
-export const calculateTotalMonthlyAmount = (subscriptions: Subscription[], currency: CurrencyCode = 'USD'): number => {
-  const totalUSD = subscriptions.reduce((total, subscription) => {
+export const calculateTotalMonthlyAmount = (subscriptions: Subscription[], currency: CurrencyCode = 'INR'): number => {
+  return subscriptions.reduce((total, subscription) => {
     let monthlyCost = subscription.cost;
     
     if (subscription.billingCycle === 'yearly') {
@@ -13,12 +13,10 @@ export const calculateTotalMonthlyAmount = (subscriptions: Subscription[], curre
     
     return total + monthlyCost;
   }, 0);
-  
-  return currency === 'USD' ? totalUSD : convertCurrency(totalUSD, 'USD', currency);
 };
 
-export const calculateTotalYearlyAmount = (subscriptions: Subscription[], currency: CurrencyCode = 'USD'): number => {
-  const totalUSD = subscriptions.reduce((total, subscription) => {
+export const calculateTotalYearlyAmount = (subscriptions: Subscription[], currency: CurrencyCode = 'INR'): number => {
+  return subscriptions.reduce((total, subscription) => {
     let yearlyCost = subscription.cost;
     
     if (subscription.billingCycle === 'monthly') {
@@ -29,12 +27,10 @@ export const calculateTotalYearlyAmount = (subscriptions: Subscription[], curren
     
     return total + yearlyCost;
   }, 0);
-  
-  return currency === 'USD' ? totalUSD : convertCurrency(totalUSD, 'USD', currency);
 };
 
-export const getCategoryTotal = (subscriptions: Subscription[], category: SubscriptionCategory, currency: CurrencyCode = 'USD'): number => {
-  const totalUSD = subscriptions
+export const getCategoryTotal = (subscriptions: Subscription[], category: SubscriptionCategory, currency: CurrencyCode = 'INR'): number => {
+  return subscriptions
     .filter(sub => sub.category === category)
     .reduce((total, sub) => {
       let monthlyCost = sub.cost;
@@ -47,8 +43,6 @@ export const getCategoryTotal = (subscriptions: Subscription[], category: Subscr
       
       return total + monthlyCost;
     }, 0);
-  
-  return currency === 'USD' ? totalUSD : convertCurrency(totalUSD, 'USD', currency);
 };
 
 export const getCategoryColor = (category: SubscriptionCategory): string => {

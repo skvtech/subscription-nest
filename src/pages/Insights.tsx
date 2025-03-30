@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -6,9 +5,11 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import { subscriptions } from "@/data/subscriptions";
 import { getCategoryColor, getCategoryTotal, formatCurrency } from "@/utils/subscriptionUtils";
 import { SubscriptionCategory } from "@/types/subscription";
+import { CurrencyCode } from "@/utils/currencyUtils";
 
 const Insights = () => {
   const [activeTab, setActiveTab] = useState("monthly");
+  const currency: CurrencyCode = 'INR';
 
   // Prepare category data
   const categories: SubscriptionCategory[] = [
@@ -87,7 +88,7 @@ const Insights = () => {
                         <Cell key={`cell-${index}`} fill={entry?.color} />
                       ))}
                     </Pie>
-                    <Tooltip formatter={(value: number) => [formatCurrency(value), 'Monthly Cost']} />
+                    <Tooltip formatter={(value: number) => [formatCurrency(value, currency), 'Monthly Cost']} />
                     <Legend />
                   </PieChart>
                 </ResponsiveContainer>
@@ -104,8 +105,8 @@ const Insights = () => {
                   <BarChart data={categoryData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
-                    <YAxis tickFormatter={(value) => `$${value}`} />
-                    <Tooltip formatter={(value: number) => [formatCurrency(value), 'Monthly Cost']} />
+                    <YAxis tickFormatter={(value) => `₹${value}`} />
+                    <Tooltip formatter={(value: number) => [formatCurrency(value, currency), 'Monthly Cost']} />
                     <Bar dataKey="value" name="Monthly Cost">
                       {categoryData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry?.color} />
@@ -127,8 +128,8 @@ const Insights = () => {
                 <BarChart data={monthlyTrendData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
-                  <YAxis tickFormatter={(value) => `$${value}`} />
-                  <Tooltip formatter={(value: number) => [formatCurrency(value), 'Monthly Cost']} />
+                  <YAxis tickFormatter={(value) => `₹${value}`} />
+                  <Tooltip formatter={(value: number) => [formatCurrency(value, currency), 'Monthly Cost']} />
                   <Legend />
                   <Bar dataKey="amount" name="Monthly Spending" fill="#4f46e5" />
                 </BarChart>
@@ -160,7 +161,7 @@ const Insights = () => {
                         <Cell key={`cell-${index}`} fill={entry?.color} />
                       ))}
                     </Pie>
-                    <Tooltip formatter={(value: number) => [formatCurrency(value), 'Yearly Cost']} />
+                    <Tooltip formatter={(value: number) => [formatCurrency(value, currency), 'Yearly Cost']} />
                     <Legend />
                   </PieChart>
                 </ResponsiveContainer>
@@ -177,8 +178,8 @@ const Insights = () => {
                   <BarChart data={categoryData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
-                    <YAxis tickFormatter={(value) => `$${value}`} />
-                    <Tooltip formatter={(value: number) => [formatCurrency(value), 'Yearly Cost']} />
+                    <YAxis tickFormatter={(value) => `₹${value}`} />
+                    <Tooltip formatter={(value: number) => [formatCurrency(value, currency), 'Yearly Cost']} />
                     <Bar dataKey="value" name="Yearly Cost">
                       {categoryData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry?.color} />

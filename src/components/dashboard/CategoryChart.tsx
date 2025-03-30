@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
@@ -17,7 +16,7 @@ interface ChartData {
   color: string;
 }
 
-export const CategoryChart = ({ subscriptions, currency = 'USD' }: CategoryChartProps) => {
+export const CategoryChart = ({ subscriptions, currency = 'INR' }: CategoryChartProps) => {
   const [data, setData] = useState<ChartData[]>([]);
 
   useEffect(() => {
