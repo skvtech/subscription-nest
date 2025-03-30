@@ -3,12 +3,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Subscription } from "@/types/subscription";
 import { getUpcomingBillings, formatCurrency } from "@/utils/subscriptionUtils";
 import { Calendar } from "lucide-react";
+import { CurrencyCode } from "@/utils/currencyUtils";
 
 interface UpcomingBillingsProps {
   subscriptions: Subscription[];
+  currency?: CurrencyCode;
 }
 
-export const UpcomingBillings = ({ subscriptions }: UpcomingBillingsProps) => {
+export const UpcomingBillings = ({ subscriptions, currency = 'USD' }: UpcomingBillingsProps) => {
   const upcomingBillings = getUpcomingBillings(subscriptions, 7);
 
   const formatDate = (dateString: string) => {
@@ -60,7 +62,7 @@ export const UpcomingBillings = ({ subscriptions }: UpcomingBillingsProps) => {
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="text-right">
-                    <div className="font-medium">{formatCurrency(sub.cost)}</div>
+                    <div className="font-medium">{formatCurrency(sub.cost, currency)}</div>
                     <div className="text-sm text-muted-foreground">{getDaysUntil(sub.nextBillingDate)}</div>
                   </div>
                   <Calendar className="h-5 w-5 text-muted-foreground" />

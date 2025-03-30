@@ -1,12 +1,14 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatCurrency } from "@/utils/subscriptionUtils";
+import { CurrencyCode } from "@/utils/currencyUtils";
 
 interface StatsCardsProps {
   subscriptionCount: number;
   monthlyTotal: number;
   yearlyTotal: number;
   upcomingCount: number;
+  currency?: CurrencyCode;
 }
 
 export const StatsCards = ({
@@ -14,6 +16,7 @@ export const StatsCards = ({
   monthlyTotal,
   yearlyTotal,
   upcomingCount,
+  currency = 'USD',
 }: StatsCardsProps) => {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -62,7 +65,7 @@ export const StatsCards = ({
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{formatCurrency(monthlyTotal)}</div>
+          <div className="text-2xl font-bold">{formatCurrency(monthlyTotal, currency)}</div>
           <p className="text-xs text-muted-foreground">
             per month
           </p>
@@ -89,7 +92,7 @@ export const StatsCards = ({
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{formatCurrency(yearlyTotal)}</div>
+          <div className="text-2xl font-bold">{formatCurrency(yearlyTotal, currency)}</div>
           <p className="text-xs text-muted-foreground">
             per year
           </p>

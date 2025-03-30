@@ -4,9 +4,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 import { Subscription, SubscriptionCategory } from "@/types/subscription";
 import { getCategoryColor, getCategoryTotal, formatCurrency } from "@/utils/subscriptionUtils";
+import { CurrencyCode } from "@/utils/currencyUtils";
 
 interface CategoryChartProps {
   subscriptions: Subscription[];
+  currency?: CurrencyCode;
 }
 
 interface ChartData {
@@ -15,7 +17,7 @@ interface ChartData {
   color: string;
 }
 
-export const CategoryChart = ({ subscriptions }: CategoryChartProps) => {
+export const CategoryChart = ({ subscriptions, currency = 'USD' }: CategoryChartProps) => {
   const [data, setData] = useState<ChartData[]>([]);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ export const CategoryChart = ({ subscriptions }: CategoryChartProps) => {
 
     const chartData = categories
       .map(category => {
-        const total = getCategoryTotal(subscriptions, category);
+        const total = getCategoryTotal(subscriptions, category, currency);
         return {
           name: category.charAt(0).toUpperCase() + category.slice(1),
           value: total,
@@ -42,7 +44,7 @@ export const CategoryChart = ({ subscriptions }: CategoryChartProps) => {
       .filter(item => item.value > 0);
 
     setData(chartData);
-  }, [subscriptions]);
+  }, [subscriptions, currency]);
 
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
     const RADIAN = Math.PI / 180;
@@ -90,7 +92,7 @@ export const CategoryChart = ({ subscriptions }: CategoryChartProps) => {
                 ))}
               </Pie>
               <Tooltip 
-                formatter={(value: number) => [formatCurrency(value), 'Monthly Cost']}
+                formatter={(value: number) => [formatCurrency(value, currency), 'Monthly Cost']}
               />
               <Legend />
             </PieChart>

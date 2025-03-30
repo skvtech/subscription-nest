@@ -18,12 +18,14 @@ import { Subscription } from "@/types/subscription";
 import { formatCurrency, getCategoryIcon } from "@/utils/subscriptionUtils";
 import { Bell, Edit, MoreHorizontal, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { CurrencyCode } from "@/utils/currencyUtils";
 
 interface SubscriptionListProps {
   subscriptions: Subscription[];
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
   onToggleReminder: (id: string) => void;
+  currency?: CurrencyCode;
 }
 
 export const SubscriptionList = ({
@@ -31,6 +33,7 @@ export const SubscriptionList = ({
   onEdit,
   onDelete,
   onToggleReminder,
+  currency = 'USD',
 }: SubscriptionListProps) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -87,7 +90,7 @@ export const SubscriptionList = ({
                   {getCategoryIcon(subscription.category)} {subscription.category}
                 </Badge>
               </TableCell>
-              <TableCell>{formatCurrency(subscription.cost)}</TableCell>
+              <TableCell>{formatCurrency(subscription.cost, currency)}</TableCell>
               <TableCell>{getBillingCycleLabel(subscription.billingCycle)}</TableCell>
               <TableCell>{formatDate(subscription.nextBillingDate)}</TableCell>
               <TableCell>
