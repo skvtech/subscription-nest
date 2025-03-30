@@ -1,3 +1,4 @@
+
 import { Subscription, SubscriptionCategory } from "@/types/subscription";
 import { CurrencyCode, formatCurrency as formatCurrencyUtil } from "./currencyUtils";
 
@@ -60,7 +61,7 @@ export const getCategoryColor = (category: SubscriptionCategory): string => {
   return colors[category];
 };
 
-export const formatCurrency = (amount: number, currency: CurrencyCode = 'USD'): string => {
+export const formatCurrency = (amount: number, currency: CurrencyCode = 'INR'): string => {
   return formatCurrencyUtil(amount, currency);
 };
 
