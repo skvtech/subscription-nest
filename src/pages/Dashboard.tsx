@@ -32,15 +32,15 @@ const Dashboard = () => {
   useEffect(() => {
     const loadSubscriptions = async () => {
       try {
-        // Try to load from Redis first
-        const redisData = await getSubscriptions(userId);
+        // Try to load from localStorage first
+        const storedData = await getSubscriptions(userId);
         
-        // If no data in Redis, use initial data and save to Redis
-        if (redisData.length === 0) {
+        // If no data in localStorage, use initial data and save to localStorage
+        if (storedData.length === 0) {
           setSubscriptions(initialSubscriptions);
           await saveSubscriptions(userId, initialSubscriptions);
         } else {
-          setSubscriptions(redisData);
+          setSubscriptions(storedData);
         }
       } catch (error) {
         console.error("Error loading subscriptions:", error);
@@ -62,7 +62,7 @@ const Dashboard = () => {
     const updatedSubscriptions = subscriptions.filter(sub => sub.id !== id);
     setSubscriptions(updatedSubscriptions);
     
-    // Save to Redis
+    // Save to localStorage
     await saveSubscriptions(userId, updatedSubscriptions);
     
     toast({
@@ -86,7 +86,7 @@ const Dashboard = () => {
     
     setSubscriptions(updatedSubscriptions);
     
-    // Save to Redis
+    // Save to localStorage
     await saveSubscriptions(userId, updatedSubscriptions);
     
     const subscription = subscriptions.find(sub => sub.id === id);
