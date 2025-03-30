@@ -53,6 +53,7 @@ export function AppSidebar() {
           <SidebarTrigger asChild>
             <Button variant="ghost" size="icon">
               <Menu size={20} />
+              <span className="sr-only">Toggle sidebar</span>
             </Button>
           </SidebarTrigger>
         </div>
