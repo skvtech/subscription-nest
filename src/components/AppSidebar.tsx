@@ -50,7 +50,7 @@ export function AppSidebar() {
       <div className="p-4 flex items-center">
         <h1 className="text-xl font-bold text-primary">SubTracker</h1>
         <div className="ml-auto md:hidden">
-          <SidebarTrigger asChild>
+          <SidebarTrigger>
             <Button variant="ghost" size="icon">
               <Menu size={20} />
               <span className="sr-only">Toggle sidebar</span>
